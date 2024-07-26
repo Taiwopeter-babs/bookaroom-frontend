@@ -1,0 +1,159 @@
+@use "../../utils/base.scss" as *;
+
+@mixin active-link() {
+    content: "";
+    display: block;
+    height: 1px;
+    background: #202729;
+    // width: 0%;
+    transition: all ease-in-out 300ms;
+}
+
+.header {
+    height: 70px;
+    @include flex-display($justify: space-between);
+    position: sticky;
+    top: 0;
+}
+
+.navbar {
+    width: 100%;
+    height: 100%;
+    @include flex-display($justify: space-evenly);
+
+    .nav_link::after {
+        @include active-link;
+        width: 0%;
+    }
+
+    .nav_link.active::after {
+        @include active-link;
+        width: 100%;
+    }
+
+    .nav_link:hover::after {
+        @include active-link;
+        width: 100%;
+    }
+}
+
+.navbar li,
+.nav_buttons > button {
+    margin: 0 0.5rem;
+}
+
+.nav_items,
+.nav_links,
+.nav_buttons {
+    @include flex-display($justify: space-around, $dir: row);
+}
+
+.nav_links {
+    width: 70%;
+}
+
+.nav_items {
+    display: flex;
+}
+
+.nav_links,
+.nav_buttons {
+    @include flex-display($justify: space-evenly);
+}
+
+.nav_links {
+    margin-right: 3rem;
+}
+
+.nav_buttons {
+    width: 20%;
+}
+
+nav.navbar > #site_logo {
+    cursor: pointer;
+    text-decoration: overline;
+    font-style: italic;
+    color: #202729;
+    margin: 0 0.5rem;
+
+    &:hover {
+        background-color: black;
+        color: white;
+    }
+}
+
+.navbar svg,
+.navbar input,
+.nav_links h3 {
+    display: none;
+}
+
+// SMALL DEVICES
+@media screen and (max-width: 750px) {
+    .navbar {
+        @include flex-display($justify: space-between);
+
+        li {
+            margin: 1rem 0;
+        }
+
+        a {
+            display: inline-block;
+            &:hover {
+                margin-left: 2px;
+                transition: all ease-in-out 300ms;
+            }
+        }
+    }
+
+    nav.navbar #site_logo {
+        margin-left: 1rem;
+    }
+
+    .nav_items {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        height: 100vh;
+        width: 250px;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background: rgb(97, 80, 80);
+        background: linear-gradient(to bottom, #474e52, #7d8389);
+        padding: 2rem;
+        transition: all ease-in-out 500ms;
+        color: white;
+    }
+
+    .nav_links,
+    .nav_buttons {
+        flex-direction: column;
+        width: auto;
+    }
+
+    .nav_buttons {
+        height: 100px;
+        @include flex-display($justify: space-evenly, $dir: column);
+    }
+
+    .nav_links {
+        margin: 0;
+
+        h3 {
+            display: inline-block;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 13px;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .showSideBar {
+        right: 0;
+    }
+
+    .navbar .nav_link.active::after {
+        @include active-link;
+        width: 100%;
+    }
+}
